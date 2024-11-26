@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recibo</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+            /* Remove margens padrão da página */
+        }
+
+        @font-face {
+            font-family: 'Arial';
+            src: url('arial.ttf') format('truetype');
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .fs14 {
+            font-size: 14px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+            padding: 10px;
+        }
+
+        .recibo {
+            border: 1px solid #dcdcdc;
+            /* Cinza bem claro */
+            padding: 10px;
+            margin-bottom: 10px;
+            height: 45%;
+            /* Ajuste proporcional para caber em A4 */
+            box-sizing: border-box;
+            page-break-inside: avoid;
+            /* Evita quebra no meio do recibo */
+            page-break-after: auto;
+            /* Permite quebra somente após os dois recibos */
+        }
+
+        .logo {
+            width: 100%;
+            /* Metade da largura da coluna */
+        }
+
+        .linha-divisoria {
+            border-top: 2px dashed #dcdcdc;
+            /* Linha divisória bem clara */
+            margin: 10px 0;
+        }
+
+        table {
+            font-size: 12px;
+            border-color: #dcdcdc;
+            /* Borda clara */
+        }
+
+        table th,
+        table td {
+            padding: 3px;
+            /* Padding reduzido */
+            vertical-align: middle;
+        }
+
+        .footer {
+            font-size: 10px;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body class="">
+    <div class="container">
+        <!-- Via 1 -->
+        <div class="recibo">
+            <div class="row mb-2 align-items-center">
+                <div class="col-5">
+                    <img src="{{ caminho_logo }}" alt="Logo" class="logo img-fluid">
+                </div>
+                <div class="col-7 text-end ">
+                    <h6>Amatools Com. E Imp. Ltda</h6>
+                    <p>CNPJ: 07.228.424/0001-57</p>
+                </div>
+            </div>
+            <p class="mb-3">Eu, <strong>{{ nome_funcionario }}</strong>, autorizo a empresa Amatools Comercial e
+                Importadora Ltda a descontar dos meus vencimentos, a(s) importância(s) abaixo discriminada(s):</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor (R$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Convênio Médico (8111)</td>
+                        <td>{{ convenio_medico }}</td>
+                    </tr>
+                    <tr>
+                        <td>Uniodonto (0437)</td>
+                        <td>{{ uniodonto }}</td>
+                    </tr>
+                    <tr>
+                        <td>Refeição (0421)</td>
+                        <td>{{ refeicao }}</td>
+                    </tr>
+                    <tr>
+                        <td>Farmácia (0401)</td>
+                        <td>{{ farmacia }}</td>
+                    </tr>
+                </tbody>
+                <tfoot class="fs14">
+                    <tr>
+                        <th>Total</th>
+                        <th>{{ total }}</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <p class="mt-3">Para toda a clareza e efeitos legais vai o presente assinado.</p>
+            <p class="mb-5">Piracicaba (SP), {{ dia }} de {{ mes }} de {{ ano }}.</p>
+            <p class="footer text-start"><strong>{{ nome_funcionario }}</strong></p>
+        </div>
+
+        <!-- Linha Divisória -->
+        <div class="linha-divisoria"></div>
+
+        <!-- Via 2 (cópia) -->
+        <div class="recibo">
+            <div class="row mb-2 align-items-center">
+                <div class="col-5">
+                    <img src="{{ caminho_logo }}" alt="Logo" class="logo img-fluid">
+                </div>
+                <div class="col-7 text-end">
+                    <h6>Amatools Com. E Imp. Ltda</h6>
+                    <p>CNPJ: 07.228.424/0001-57</p>
+                </div>
+            </div>
+            <p class="mb-3">Eu, <strong>{{ nome_funcionario }}</strong>, autorizo a empresa Amatools Comercial e
+                Importadora Ltda a descontar dos meus vencimentos, a(s) importância(s) abaixo discriminada(s):</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor (R$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Convênio Médico (8111)</td>
+                        <td>{{ convenio_medico }}</td>
+                    </tr>
+                    <tr>
+                        <td>Uniodonto (0437)</td>
+                        <td>{{ uniodonto }}</td>
+                    </tr>
+                    <tr>
+                        <td>Refeição (0421)</td>
+                        <td>{{ refeicao }}</td>
+                    </tr>
+                    <tr>
+                        <td>Farmácia (0401)</td>
+                        <td>{{ farmacia }}</td>
+                    </tr>
+                </tbody>
+                <tfoot class="fs14">
+                    <tr>
+                        <th>Total</th>
+                        <th>{{ total }}</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <p class="mt-3">Para toda a clareza e efeitos legais vai o presente assinado.</p>
+            <p class="mb-5">Piracicaba (SP), {{ dia }} de {{ mes }} de {{ ano }}.</p>
+            <p class="footer text-start border-top"><strong>{{ nome_funcionario }}</strong></p>
+        </div>
+    </div>
+</body>
+
+</html>
